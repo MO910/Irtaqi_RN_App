@@ -1,5 +1,5 @@
 export default {
-	setUserName(state, action) {
-		state.name = action.payload;
+	setUserData(state, action) {
+		state.userData = { ...state.userData, ...action.payload };
 	},
 };

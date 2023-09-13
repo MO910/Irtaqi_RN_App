@@ -1,14 +1,9 @@
-# Expo Router Example
+# Hello Mohammed
 
-Use [`expo-router`](https://expo.github.io/router) to build native navigation using files in the `app/` directory.
+this is the [Figma Ui Design](https://www.figma.com/file/FzYMWHeV6CQvIlsT0CCu1b/Project-mobile-UI?type=design&node-id=50%3A759&mode=design&t=eExrfFzSBQmhzShn-1)
 
-## 🚀 How to use
+you can interact with the graphql server by visiting [apollo sandbox](https://studio.apollographql.com/sandbox) then type the server url in this box like this:
 
-```sh
-npx create-expo-app -e with-router
-```
+![apollo Screenshot](./assets/apollo%20Screenshot.png)
 
-## 📝 Notes
-
-- [Expo Router: Docs](https://expo.github.io/router)
-- [Expo Router: Repo](https://github.com/expo/router)
+### https://irtaqi-api.vercel.app/graphql

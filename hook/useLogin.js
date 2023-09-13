@@ -4,24 +4,26 @@ import getUserDataReq from "./requests/getUserDataReq";
 
 const API_URL = "https://irtaqi-api.vercel.app";
 
+import { useDispatch } from "react-redux";
+import { userActions } from "../store/user";
+
+function setUserId(dispatch, id) {
+	dispatch(userActions.setUserData({ id }));
+}
+
 export default function (userLoginInfo) {
-	const [userId, setUserId] = useState("");
+	const dispatch = useDispatch();
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState(null);
 	// login function
 	const login = async () => {
 		setIsLoading(true);
-		// get the token
 		try {
-			var token = await getTokenReq(API_URL, userLoginInfo);
-		} catch (error) {
-			setError(error);
-			console.log(error);
-		}
-		// get user data
-		try {
-			var userData = await getUserDataReq(API_URL, token);
-			setUserId(userData.user._id);
+			// get the token
+			const token = await getTokenReq(API_URL, userLoginInfo);
+			// get user data
+			const { user } = await getUserDataReq(API_URL, token);
+			setUserId(dispatch, user._id);
 		} catch (error) {
 			setError(error);
 			console.log(error);
@@ -33,5 +35,5 @@ export default function (userLoginInfo) {
 		login();
 	}, []);
 	// return
-	return { userId, isLoading, error };
+	return { isLoading, error };
 }

@@ -4,8 +4,7 @@ import reducers from "./reducers";
 export const userSlice = createSlice({
 	name: "user",
 	initialState: {
-		name: null,
-		email: null,
+		userData: {},
 	},
 	reducers,
 });
