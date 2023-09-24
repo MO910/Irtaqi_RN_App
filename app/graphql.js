@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import { Text, View, ActivityIndicator } from "react-native";
 import { gql, useQuery } from "@apollo/client";
+import * as SecureStore from "expo-secure-store";
 
-import { useSelector, useDispatch } from "react-redux";
+// import { useSelector, useDispatch } from "react-redux";
+import { getUserData } from "../hook/useUserData";
 import { userActions } from "../store/user";
 
 const Users = (id) => gql`
@@ -14,9 +16,9 @@ const Users = (id) => gql`
 `;
 
 export default function () {
-	const { userData } = useSelector((state) => state.user);
+	const { userData } = getUserData();
 	const { data, loading, error } = useQuery(Users(userData.id));
-	const dispatch = useDispatch();
+	// const dispatch = useDispatch();
 
 	useEffect(() => {
 		console.log("first_name", data?.user?.[0]?.first_name);

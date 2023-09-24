@@ -1,5 +1,10 @@
+import * as SecureStore from "expo-secure-store";
+
 export default {
-	setUserData(state, action) {
+	setUserDataState(state, action) {
 		state.userData = { ...state.userData, ...action.payload };
+	},
+	deleteUserDataState(state, action) {
+		state.userData = null;
 	},
 };

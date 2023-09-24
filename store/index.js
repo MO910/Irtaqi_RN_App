@@ -4,4 +4,7 @@ import { langSlice } from "./lang";
 
 export const Store = configureStore({
 	reducer: { user: userSlice.reducer, lang: langSlice.reducer },
+
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware({ serializableCheck: false }),
 });
