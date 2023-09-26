@@ -17,8 +17,11 @@ const _layout = () => {
 	return (
 		<ApolloProvider client={client}>
 			<Provider store={Store}>
-				<Stack initialRouteName="index">
-					<Stack.Screen name="index" />
+				<Stack>
+					<Stack.Screen
+						name="(tabs)"
+						options={{ headerShown: false }}
+					/>
 				</Stack>
 			</Provider>
 		</ApolloProvider>

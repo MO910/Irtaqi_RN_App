@@ -6,6 +6,7 @@ export default async function (userId, lazyQuery, updateUserData) {
 	] = lazyQuery;
 	// do the query
 	const { data } = await getUserInfo({ variables: { id: userId } });
-	//
-	if (!graphQlLoading) updateUserData(data.user[0]);
+	// update the user data after loading
+	delete data._typename;
+	if (!graphQlLoading) updateUserData({ id: userId, ...data.user[0] });
 }

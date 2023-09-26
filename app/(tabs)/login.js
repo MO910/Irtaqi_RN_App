@@ -1,30 +1,27 @@
 import { View, Text, ActivityIndicator, TextInput, Button } from "react-native";
 import React, { useEffect, useCallback, useState } from "react";
 import tw from "twrnc";
-
-import useLogin from "../hook/useLogin";
-import useUserData from "../hook/useUserData";
+// hooks
+import useLogin from "../../hook/useLogin";
+import connectToUserStore from "../../hook/useConnectToStore/instants/connectToUserStore";
 // redux
 import { useSelector, useDispatch } from "react-redux";
-// import { userActions } from "../store/user";
-
-import { gql, useLazyQuery } from "@apollo/client";
-const UsersQuery = gql`
-	query User($id: ID) {
-		user(id: $id) {
-			first_name
-		}
-	}
-`;
-
+import { userActions } from "../../store/user";
+// graphQL
+import { useLazyQuery } from "@apollo/client";
+import graphQl from "../../graphQl";
+// page
 export default function login() {
 	const [email, setEmail] = useState("teacher@gmail.com");
 	const [password, setPassword] = useState("123");
 	// redux
 	const { userData } = useSelector((state) => state.user); // select a slice
-	const lazyQuery = useLazyQuery(UsersQuery);
-
-	const { isLoading, error, loginWrapper } = useLogin({
+	// graphQL
+	const GetUserById = graphQl.queries.GetUserById;
+	const lazyQuery = useLazyQuery(GetUserById);
+	// login hook
+	const connectionsInstance = connectToUserStore();
+	var { isLoading, error, loginWrapper } = useLogin(connectionsInstance, {
 		email,
 		password,
 	});

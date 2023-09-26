@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react";
-import useUserData from "../useUserData";
+import { useUpdateUserData } from "../useUserData";
 // actions
 import getId from "./actions/getId";
 import fetchUserInfo from "./actions/fetchUserInfo";
+
+import { useSelector, useDispatch } from "react-redux";
+import useConnectToStore from "../useConnectToStore";
+import connectToUserStore from "../useConnectToStore/instants/connectToUserStore";
+
+import { userActions } from "../../store/user";
 
 function axiosErrorHandler(error, setError) {
 	switch (error.code) {
@@ -17,20 +23,28 @@ function axiosErrorHandler(error, setError) {
 	}
 }
 
-export default function (userLoginInfo) {
+export default function (connectToUserStore, userLoginInfo) {
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState("");
-	const { updateUserData } = useUserData();
+	// redux
+	const dispatch = useDispatch();
+	const { userData, userDataKey } = useSelector((state) => state.user);
+	// const updateUserData = useUpdateUserData({
+	// 	dispatch,
+	// 	userData,
+	// 	userDataKey,
+	// });
+	// const updateUserData = connectionsInstance.update;
 	// login function
 	async function login(lazyQuery) {
+		// get user id
 		try {
-			// get user id
-			var userId = await getId(userLoginInfo, updateUserData);
+			var userId = await getId(userLoginInfo);
 		} catch (error) {
 			axiosErrorHandler(error, setError);
 		}
 		// graphQl fetch
-		await fetchUserInfo(userId, lazyQuery, updateUserData);
+		await fetchUserInfo(userId, lazyQuery, connectToUserStore.update);
 	}
 	async function loginWrapper(lazyQuery) {
 		setIsLoading(true);

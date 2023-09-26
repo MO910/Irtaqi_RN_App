@@ -7,4 +7,13 @@ export default {
 	deleteUserDataState(state, action) {
 		state.userData = null;
 	},
+	// connectToSecureStore() {
+	// 	const connectToUserStore = new useConnectToStore({
+	// 		reduxActions: userActions,
+	// 		secureStorageKey: userDataKey,
+	// 		updateActionName: "setUserDataState",
+	// 		deleteActionName: "deleteUserDataState",
+	// 		isJSON: true,
+	// 	});
+	// },
 };
