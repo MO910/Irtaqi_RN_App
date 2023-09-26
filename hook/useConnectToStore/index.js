@@ -18,7 +18,6 @@ export default class ConnectToStore {
 		this.isJSON = isJSON;
 	}
 	get() {
-		console.log(this.dispatch, this.reduxActions, this.secureStorageKey);
 		SecureStore.getItemAsync(this.secureStorageKey).then((data) => {
 			data = this.isJSON ? JSON.parse(data) : data;
 			// update redux state with the stored data
@@ -26,16 +25,9 @@ export default class ConnectToStore {
 		});
 	}
 	update(feedData) {
-		console.log(
-			{ feedData },
-			this.dispatch,
-			this.reduxActions,
-			this.secureStorageKey,
-		);
 		// update redux state
 		this.dispatch(this.reduxActions[this.updateActionName](feedData));
 		// update secure store state
-		console.log({ feedData });
 		feedData = this.isJSON ? JSON.stringify(feedData) : feedData;
 		return SecureStore.setItemAsync(this.secureStorageKey, feedData);
 	}

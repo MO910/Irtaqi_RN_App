@@ -1,4 +1,4 @@
-export default async function (userId, lazyQuery, updateUserData) {
+export default async function ({ userId, lazyQuery, connectToUserStore }) {
 	if (!userId) return;
 	const [
 		getUserInfo,
@@ -8,5 +8,6 @@ export default async function (userId, lazyQuery, updateUserData) {
 	const { data } = await getUserInfo({ variables: { id: userId } });
 	// update the user data after loading
 	delete data._typename;
-	if (!graphQlLoading) updateUserData({ id: userId, ...data.user[0] });
+	if (!graphQlLoading)
+		connectToUserStore.update({ id: userId, ...data.user[0] });
 }

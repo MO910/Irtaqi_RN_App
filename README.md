@@ -7,3 +7,11 @@ you can interact with the graphql server by visiting [apollo sandbox](https://st
 ![apollo Screenshot](./assets/apollo%20Screenshot.png)
 
 ### https://irtaqi-api.vercel.app/graphql
+
+## icons
+
+[![ionicons](./assets/ionicons.jpg)](https://ionic.io/ionicons)
+
+## Expo icons guid
+
+https://docs.expo.dev/guides/icons/

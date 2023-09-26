@@ -52,8 +52,6 @@ export default function index() {
 			) : (
 				<Button onPress={() => router.push("/login")} title="login" />
 			)}
-			<Button onPress={() => router.push("/graphql")} title="graphql" />
-			<Button onPress={() => router.push("/storage")} title="storage" />
 			{/* another page in the same tab */}
 			<Button
 				onPress={() => router.push("/home/anotherInHome")}
